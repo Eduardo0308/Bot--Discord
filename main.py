@@ -23,6 +23,13 @@ def flip_coin():
         return "cara"
     else:
         return "coroa"
+
+def get_duck_image_url():    
+    url = 'https://random-d.uk/api/random'
+    res = requests.get(url)
+    data = res.json()
+    return data['url']
+    
 @bot.event
 async def on_ready():
     print(f'Estamos logados como {bot.user}')
@@ -65,6 +72,12 @@ senha → Gera uma senha
 moeda → Cara ou coroa
 """
     await ctx.send(comandos)
+
+@bot.command('duck')
+async def duck(ctx):
+    '''Uma vez que chamamos o comando duck, o programa chama a função get_duck_image_url '''
+    image_url = get_duck_image_url()
+    await ctx.send(image_url)
 
 @bot.command(description='For when you wanna settle the score some other way')
 async def choose(ctx, *choices: str):
