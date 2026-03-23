@@ -35,6 +35,36 @@ async def on_ready():
     print(f'Estamos logados como {bot.user}')
 
 @bot.command()
+async def m_ambiente(ctx):
+    ideias = [
+        "Reaproveitar potes de vidro e embalagens",
+        "Usar folhas de papel frente e verso",
+        "Transformar roupas velhas em panos de limpeza",
+        "Utilizar sacolas reutilizáveis",
+        "Evitar copos e talheres descartáveis", 
+        "Usar garrafas reutilizáveis",
+        "Separar papel, plástico, vidro e metal para reciclagem",
+        "Não misturar lixo orgânico com reciclável",
+        "Levar pilhas e eletrônicos a pontos de coleta",
+        "Usar transporte sustentável"
+    ]
+    await ctx.send(random.choice(ideias, 3))
+
+@bot.command()
+async def r_desperdicio(ctx):
+    praticas = [
+        "Planejar as refeições antes de fazer compras",
+        "Aproveitar sobras em novas receitas", 
+        "Fazer compostagem com restos de alimentos",
+        "Fechar a torneira ao usar",
+        "Verificar vazamentos regularmente",
+        "Usar lâmpadas LED(gastam menos energia)",
+        "Aproveitar a luz natural",
+        "Desligar aparelhos que não estão sendo usados"
+    ]
+    await ctx.send(random.sample(praticas, 3))
+
+@bot.command()
 async def hello(ctx):
     await ctx.send(f'Olá! eu sou um bot {bot.user}!')
 
@@ -113,4 +143,4 @@ async def on_message(message):
         await message.channel.send(resultado)
     await bot.process_commands(message)
 
-bot.run("MTQ3ODE1MDE3NDI2OTUwOTgzNg.Gdj_XE.9DRc3dlCy0bgqowMU8UldNdBV2ydFSmx5jceL0")
+bot.run("TOKEN")
