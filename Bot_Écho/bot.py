@@ -230,4 +230,16 @@ async def traduzir(interaction: discord.Interaction, texto: str, idioma: str = "
         await interaction.response.send_message(f"Erro ao traduzir: {e}")
 
 
+@bot.tree.command(name="resumir", description="Resume um texto longo")
+async def resumir(interaction: discord.Interaction, texto: str, frases: int = 3):
+    try:
+        parser = PlaintextParser.from_string(texto, Tokenizer("portuguese"))
+        summarizer = LexRankSummarizer()
+        resumo = summarizer(parser.document, frases)
+        resultado = " ".join(str(frase) for frase in resumo)
+        await interaction.response.send_message(f"**Resumo:**\n{resultado}")
+    except Exception as e:
+        await interaction.response.send_message(f"Erro ao resumir: {e}")
+
+
 bot.run("MTQ3ODE1MDE3NDI2OTUwOTgzNg.GyrIVU.xl9hosYHvxwvgxmIIMQB6dOD21r7ceC73woWSM")
