@@ -221,5 +221,13 @@ async def indent(ctx):
     elif classe.strip() == "Real images":
         await ctx.send("Essa imagem é real")
 
+@bot.tree.command(name="traduzir", description="Traduz um texto")
+async def traduzir(interaction: discord.Interaction, texto: str, idioma: str = "en"):
+    try:
+        traducao = GoogleTranslator(source="auto", target=idioma).translate(texto)
+        await interaction.response.send_message(f"**Tradução ({idioma}):**\n{traducao}")
+    except Exception as e:
+        await interaction.response.send_message(f"Erro ao traduzir: {e}")
+
 
 bot.run("MTQ3ODE1MDE3NDI2OTUwOTgzNg.GyrIVU.xl9hosYHvxwvgxmIIMQB6dOD21r7ceC73woWSM")
