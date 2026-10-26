@@ -275,7 +275,7 @@ async def fatos(ctx):
     motor = pyttsx3.init()
 # Criando um dicionário de exemplo
 
-    url = f"https://uselessfacts.jsph.pl/api/v2/facts/random"
+    url = "https://uselessfacts.jsph.pl/api/v2/facts/random"
 
     resposta = requests.get(url)
 
