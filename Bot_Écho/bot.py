@@ -10,10 +10,8 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 from deep_translator import GoogleTranslator
+import pyttsx3
 
-# ===================================================
-# CONFIGURAÇÃO DO BOT
-# ===================================================
 
 # Carrega as variáveis do arquivo .env (onde fica o token)
 load_dotenv()
@@ -272,6 +270,22 @@ async def tempo_hj(ctx, *, cidade: str = None):
     except requests.RequestException:
         await ctx.send("Não consegui acessar o serviço de clima agora.")
 
+@bot.command()
+async def fatos(ctx):
+    motor = pyttsx3.init()
+# Criando um dicionário de exemplo
+
+    url = f"https://uselessfacts.jsph.pl/api/v2/facts/random"
+
+    resposta = requests.get(url)
+
+    if resposta.status_code == 200:
+        await ctx.send(resposta.json())
+        motor.say(resposta.json())
+        motor.runAndWait()
+        motor.stop()
+    else:
+        await ctx.send("Conexão falhou.")
 
 @bot.command()
 async def temperatura(ctx):
@@ -431,4 +445,4 @@ async def resumir(interaction: discord.Interaction, texto: str, frases: int = 3)
 # INICIAR O BOT
 # ===================================================
 
-bot.run(TOKEN)
+bot.run(TOLKEN)
