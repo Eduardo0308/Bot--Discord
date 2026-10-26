@@ -280,8 +280,8 @@ async def fatos(ctx):
     resposta = requests.get(url)
 
     if resposta.status_code == 200:
-        await ctx.send(resposta.json())
-        motor.say(resposta.json())
+        await ctx.send(resposta.json()["text"])
+        motor.say(resposta.json()["text"])
         motor.runAndWait()
         motor.stop()
     else:
